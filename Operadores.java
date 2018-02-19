@@ -46,7 +46,18 @@ public class Operadores {
                     n--;
                 }
             
-                else if (aux1.equals("(")  || aux1.equals(")") ){
+                else if (aux1.equals(")") ){
+                    if(n==0){
+                        
+                    }
+                    else
+                        tokens.pop();
+                        n--;
+                }
+                
+                else if(aux1.equals("(")){
+                    tokens.push(aux1);
+                    n++;
                 }
             
                 else{
@@ -71,7 +82,7 @@ public class Operadores {
      
      public static void main(String[] args) {
         
-         System.out.println(revisorOperadores("- 5 + ( 56 + 6 )  - 23 * 5 / 5 "));
+         System.out.println(revisorOperadores("- 5 + ( 56 + 6 )   - 23 * 5 / 5 "));
          
          
     }
