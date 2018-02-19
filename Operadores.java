@@ -9,7 +9,7 @@ import java.util.StringTokenizer;
 
 /**
  *
- * @author francisco
+ * @author Francisco Aramburu
  */
 public class Operadores {
     
