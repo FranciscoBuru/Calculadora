@@ -5,11 +5,12 @@
  */
 package Calculadora;
 
+import java.util.StringTokenizer;
 import static javafx.scene.input.KeyCode.T;
 
 /**
  *
- * @author FARAMBURA
+ * @author Francsico Aramburu
  */
 public class Calculadora <T> extends javax.swing.JFrame {
 
@@ -367,7 +368,7 @@ public class Calculadora <T> extends javax.swing.JFrame {
     private void cincoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cincoActionPerformed
         // TODO add your handling code here:
         
-        num = num + "5";
+        num = num + "5" ;
         display.setText(num);
         
         
@@ -450,7 +451,7 @@ public class Calculadora <T> extends javax.swing.JFrame {
     private void izqActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_izqActionPerformed
         // TODO add your handling code here:
         
-        num = num + "(";
+        num = num + " " + "(" + " ";
         display.setText(num);
         
     }//GEN-LAST:event_izqActionPerformed
@@ -458,7 +459,7 @@ public class Calculadora <T> extends javax.swing.JFrame {
     private void divActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_divActionPerformed
         // TODO add your handling code here:
          
-        num = num + "/";
+        num = num +  " " + "/" + " ";
         display.setText(num);
         
     }//GEN-LAST:event_divActionPerformed
@@ -466,7 +467,7 @@ public class Calculadora <T> extends javax.swing.JFrame {
     private void multActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_multActionPerformed
         // TODO add your handling code here:
         
-        num = num + "*";
+        num = num +  " " + "*" + " ";
         display.setText(num);
         
     }//GEN-LAST:event_multActionPerformed
@@ -474,7 +475,7 @@ public class Calculadora <T> extends javax.swing.JFrame {
     private void restaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_restaActionPerformed
         // TODO add your handling code here:
         
-        num = num + "-";
+        num = num +  " " + "-" + " ";
         display.setText(num);
         
     }//GEN-LAST:event_restaActionPerformed
@@ -482,7 +483,7 @@ public class Calculadora <T> extends javax.swing.JFrame {
     private void sumaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sumaActionPerformed
         // TODO add your handling code here:
         
-        num = num + "+";
+        num = num +  " " + "+" + " ";
         display.setText(num);
        
        
@@ -492,13 +493,46 @@ public class Calculadora <T> extends javax.swing.JFrame {
     private void igualActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_igualActionPerformed
         // TODO add your handling code here:
         
+        StringTokenizer st = new StringTokenizer(display.getText());
         double aux;
         String aux1;
+        PilaA tokens = new PilaA();
+        int n=0;
         
-        aux1 = display.getText();
+       tokens.push(st.nextToken());
+       n++;
+       
+       if(tokens.peek() == "-" ){
+           tokens.pop();
+           n--;
+       }
         
-        //aux1 = aux + "";
-        display.setText(aux1);
+        
+        
+        while (st.hasMoreTokens()) {
+            
+            aux1 = st.nextToken();
+            
+            
+            
+            
+            if(aux1== "+" || aux1== "-" || aux1== "*" || aux1== "/"){
+                
+                tokens.pop();
+                n--;
+            }
+            
+            else if (aux1 == "(" || aux1 == ")"){
+            }
+            
+            else if(true){
+                tokens.push(aux1);
+            }
+         
+        }
+        
+        
+        
        
         
     }//GEN-LAST:event_igualActionPerformed
@@ -506,7 +540,7 @@ public class Calculadora <T> extends javax.swing.JFrame {
     private void derActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_derActionPerformed
         // TODO add your handling code here:
         
-        num = num + ")";
+        num = num + " " + ")" + " ";
         display.setText(num);
         
     }//GEN-LAST:event_derActionPerformed
