@@ -5,6 +5,7 @@
  */
 package Calculadora;
 
+import java.util.ArrayList;
 import java.util.StringTokenizer;
 import static javafx.scene.input.KeyCode.T;
 
@@ -23,6 +24,8 @@ public class Calculadora <T> extends javax.swing.JFrame {
 
     private String num = "";
     private double temp, temp1;
+    private String [] num2 = new String [100];
+    private int n = 0;
     
     
     /**
@@ -35,6 +38,7 @@ public class Calculadora <T> extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
+        der1 = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         der = new javax.swing.JButton();
         div = new javax.swing.JButton();
@@ -57,6 +61,7 @@ public class Calculadora <T> extends javax.swing.JFrame {
         uno = new javax.swing.JButton();
         dos = new javax.swing.JButton();
         display = new javax.swing.JTextField();
+        back = new javax.swing.JButton();
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -68,6 +73,13 @@ public class Calculadora <T> extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 100, Short.MAX_VALUE)
         );
+
+        der1.setText(")");
+        der1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                der1ActionPerformed(evt);
+            }
+        });
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -215,6 +227,13 @@ public class Calculadora <T> extends javax.swing.JFrame {
         display.setEditable(false);
         display.setHighlighter(null);
 
+        back.setText("<-");
+        back.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                backActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -222,62 +241,66 @@ public class Calculadora <T> extends javax.swing.JFrame {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addGap(0, 0, Short.MAX_VALUE)
-                                .addComponent(ac, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(signo, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(izq, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                                .addComponent(cero, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(punto, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(igual, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addGroup(jPanel3Layout.createSequentialGroup()
-                                        .addComponent(uno, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(dos, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(tres, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(jPanel3Layout.createSequentialGroup()
-                                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                            .addComponent(cuatro, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                            .addComponent(siete, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addGroup(jPanel3Layout.createSequentialGroup()
-                                                .addComponent(cinco, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(seis, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                            .addGroup(jPanel3Layout.createSequentialGroup()
-                                                .addComponent(ocho, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(nueve, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                                .addGap(0, 0, Short.MAX_VALUE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(suma, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(resta, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(mult, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(div, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(der, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(display, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(ac, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(signo, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(izq, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                        .addComponent(cero, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(punto, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(igual, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addGroup(jPanel3Layout.createSequentialGroup()
+                                    .addComponent(uno, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(dos, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(tres, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(jPanel3Layout.createSequentialGroup()
+                                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                        .addComponent(cuatro, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(siete, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(jPanel3Layout.createSequentialGroup()
+                                            .addComponent(cinco, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                            .addComponent(seis, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGroup(jPanel3Layout.createSequentialGroup()
+                                            .addComponent(ocho, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                            .addComponent(nueve, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                            .addComponent(display, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(resta, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(mult, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(div, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(der, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(back, javax.swing.GroupLayout.DEFAULT_SIZE, 46, Short.MAX_VALUE))
+                        .addGap(5, 5, 5))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                        .addComponent(suma, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap())))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(display, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addContainerGap()
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(display, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(back, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(der, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(ac, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -312,18 +335,22 @@ public class Calculadora <T> extends javax.swing.JFrame {
                     .addComponent(punto, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(cero, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(suma, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(50, 50, 50))
+                .addGap(100, 100, 100))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 323, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 321, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         pack();
@@ -331,8 +358,13 @@ public class Calculadora <T> extends javax.swing.JFrame {
 
     private void unoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_unoActionPerformed
         // TODO add your handling code here:
+        
+        
+        //Agrega un 1 a la operación
     
         num = num + "1";
+        num2[n] = num;
+        n++;
         display.setText(num);
         
         
@@ -341,7 +373,11 @@ public class Calculadora <T> extends javax.swing.JFrame {
     private void dosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dosActionPerformed
         // TODO add your handling code here:
         
+        //Agrega un 2 a la operación
+        
         num = num + "2";
+        num2[n] = num;
+        n++;
         display.setText(num);
         
         
@@ -350,7 +386,11 @@ public class Calculadora <T> extends javax.swing.JFrame {
     private void tresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tresActionPerformed
         // TODO add your handling code here:
         
+        //Agrega un 3 a la operación
+        
         num = num + "3";
+        num2[n] = num;
+        n++;
         display.setText(num);
         
         
@@ -359,7 +399,11 @@ public class Calculadora <T> extends javax.swing.JFrame {
     private void cuatroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cuatroActionPerformed
         // TODO add your handling code here:
         
+        //Agrega un 4 a la operación
+        
         num = num + "4";
+        num2[n] = num;
+        n++;
         display.setText(num);
         
         
@@ -368,7 +412,11 @@ public class Calculadora <T> extends javax.swing.JFrame {
     private void cincoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cincoActionPerformed
         // TODO add your handling code here:
         
+        //Agrega un 5 a la operación
+        
         num = num + "5" ;
+        num2[n] = num;
+        n++;
         display.setText(num);
         
         
@@ -377,7 +425,11 @@ public class Calculadora <T> extends javax.swing.JFrame {
     private void seisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_seisActionPerformed
         // TODO add your handling code here:
         
+        //Agrega un 6 a la operación
+        
         num = num + "6";
+        num2[n] = num;
+        n++;
         display.setText(num);
         
         
@@ -386,7 +438,11 @@ public class Calculadora <T> extends javax.swing.JFrame {
     private void sieteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sieteActionPerformed
         // TODO add your handling code here:
         
+        //Agrega un 7 a la operación
+        
         num = num + "7";
+        num2[n] = num;
+        n++;
         display.setText(num);
         
         
@@ -395,7 +451,11 @@ public class Calculadora <T> extends javax.swing.JFrame {
     private void ochoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ochoActionPerformed
         // TODO add your handling code here:
         
+        //Agrega un 8 a la operación
+        
         num = num + "8";
+        num2[n] = num;
+        n++;
         display.setText(num);
         
         
@@ -404,7 +464,11 @@ public class Calculadora <T> extends javax.swing.JFrame {
     private void nueveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nueveActionPerformed
         // TODO add your handling code here:
         
+        //Agrega un 9 a la operación
+        
         num = num + "9";
+        num2[n] = num;
+        n++;
         display.setText(num);
         
         
@@ -413,7 +477,11 @@ public class Calculadora <T> extends javax.swing.JFrame {
     private void ceroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ceroActionPerformed
         // TODO add your handling code here:
         
+        //Agrega un 0 a la operación
+        
         num = num + "0";
+        num2[n] = num;
+        n++;
         display.setText(num);
         
         
@@ -422,7 +490,11 @@ public class Calculadora <T> extends javax.swing.JFrame {
     private void puntoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_puntoActionPerformed
         // TODO add your handling code here:
         
+        //Agrega un . a la operación
+        
         num = num + ".";
+        num2[n] = num;
+        n++;
         display.setText(num);
         
         
@@ -431,19 +503,27 @@ public class Calculadora <T> extends javax.swing.JFrame {
     private void signoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_signoActionPerformed
         // TODO add your handling code here:
         
+        //Cambia el signo de la expresión
+        
         double aux;
         String aux1;
         
         aux = Double.parseDouble(display.getText());
         aux = -1*(aux);
-        aux1 = aux + "";
-        display.setText(aux1);
+        num = aux + "";
+        num2[n] = num;
+        n++;
+        display.setText(num);
         
     }//GEN-LAST:event_signoActionPerformed
 
     private void acActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_acActionPerformed
         // TODO add your handling code here:
+        
+        //Limpia la calculadora
+        
         num = "";
+        n=0;
         display.setText(num);
         
     }//GEN-LAST:event_acActionPerformed
@@ -451,15 +531,23 @@ public class Calculadora <T> extends javax.swing.JFrame {
     private void izqActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_izqActionPerformed
         // TODO add your handling code here:
         
-        num = num + " " + "(" + " ";
+        //Agrega un ( a la operación
+        
+        num = num  + " " +  "(" + " ";
+        num2[n] = num;
+        n++;
         display.setText(num);
         
     }//GEN-LAST:event_izqActionPerformed
 
     private void divActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_divActionPerformed
         // TODO add your handling code here:
+        
+        //Agrega un / a la operación
          
         num = num +  " " + "/" + " ";
+        num2[n] = num;
+        n++;
         display.setText(num);
         
     }//GEN-LAST:event_divActionPerformed
@@ -467,7 +555,11 @@ public class Calculadora <T> extends javax.swing.JFrame {
     private void multActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_multActionPerformed
         // TODO add your handling code here:
         
+        //Agrega un * a la operación
+        
         num = num +  " " + "*" + " ";
+        num2[n] = num;
+        n++;
         display.setText(num);
         
     }//GEN-LAST:event_multActionPerformed
@@ -475,7 +567,11 @@ public class Calculadora <T> extends javax.swing.JFrame {
     private void restaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_restaActionPerformed
         // TODO add your handling code here:
         
+        //Agrega un - a la operación
+        
         num = num +  " " + "-" + " ";
+        num2[n] = num;
+        n++;
         display.setText(num);
         
     }//GEN-LAST:event_restaActionPerformed
@@ -483,7 +579,11 @@ public class Calculadora <T> extends javax.swing.JFrame {
     private void sumaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sumaActionPerformed
         // TODO add your handling code here:
         
+        //Agrega un + a la operación
+        
         num = num +  " " + "+" + " ";
+        num2[n] = num;
+        n++;
         display.setText(num);
        
        
@@ -493,43 +593,25 @@ public class Calculadora <T> extends javax.swing.JFrame {
     private void igualActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_igualActionPerformed
         // TODO add your handling code here:
         
-        StringTokenizer st = new StringTokenizer(display.getText());
-        double aux;
-        String aux1;
-        PilaA tokens = new PilaA();
-        int n=0;
+        //Exalúa la expresión en el display y regresa un resultado adecuado
         
-       tokens.push(st.nextToken());
-       n++;
-       
-       if(tokens.peek() == "-" ){
-           tokens.pop();
-           n--;
-       }
+        
+        try{
+        Calculos c= new Calculos(display.getText());
         
         
         
-        while (st.hasMoreTokens()) {
-            
-            aux1 = st.nextToken();
-            
-            
-            
-            
-            if(aux1== "+" || aux1== "-" || aux1== "*" || aux1== "/"){
-                
-                tokens.pop();
-                n--;
-            }
-            
-            else if (aux1 == "(" || aux1 == ")"){
-            }
-            
-            else if(true){
-                tokens.push(aux1);
-            }
-         
+     
+        c.resuelve();
+        
+        display.setText(c.getResultado() + "");
+                num = c.getResultado() + "";
+
         }
+        catch(Exception e) {
+            display.setText("ERROR");
+        }
+       
         
         
         
@@ -540,10 +622,34 @@ public class Calculadora <T> extends javax.swing.JFrame {
     private void derActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_derActionPerformed
         // TODO add your handling code here:
         
+        //Agrega un ) a la operación
+        
         num = num + " " + ")" + " ";
+        num2[n] = num;
+        n++;
         display.setText(num);
         
     }//GEN-LAST:event_derActionPerformed
+
+    private void der1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_der1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_der1ActionPerformed
+
+    private void backActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backActionPerformed
+        // TODO add your handling code here:
+        
+        //Borra el último elemento de la expresión
+        
+        n--;
+        if(n>=0){
+            num = num2[n];
+            display.setText(num);
+            
+        }
+        
+        
+        
+    }//GEN-LAST:event_backActionPerformed
 
     /**
      * @param args the command line arguments
@@ -582,10 +688,12 @@ public class Calculadora <T> extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton ac;
+    private javax.swing.JButton back;
     private javax.swing.JButton cero;
     private javax.swing.JButton cinco;
     private javax.swing.JButton cuatro;
     private javax.swing.JButton der;
+    private javax.swing.JButton der1;
     private javax.swing.JTextField display;
     private javax.swing.JButton div;
     private javax.swing.JButton dos;

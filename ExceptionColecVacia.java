@@ -12,7 +12,7 @@ package Calculadora;
 public class ExceptionColecVacia  extends RuntimeException{
     
     public ExceptionColecVacia(){
-        super("Colección vacía");
+        super("ERROR");
     
     }
     
