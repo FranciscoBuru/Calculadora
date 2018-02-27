@@ -5,7 +5,7 @@ import java.util.StringTokenizer;
 
 /**
  *
- * @author Sony
+ * @author Francsico Aramburu, David Espinosa, Alan Ramirez
  */
 public class Calculos extends PilaA{
 
