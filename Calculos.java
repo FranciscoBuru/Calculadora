@@ -305,6 +305,8 @@ public class Calculos extends PilaA{
                 pila.push(Double.valueOf(listaa.get(pos)));                
                 
             }
+            
+            
             else{
                 num1=pila.pop();
                 num2=pila.pop();
@@ -370,6 +372,8 @@ public class Calculos extends PilaA{
              resultado=reduce(lista);
         
         }
+        else
+           throw new ExceptionColecVacia();
     }
     
    
